@@ -436,6 +436,11 @@ public class GameManager : MonoBehaviour
         CheckForPlayerInput();
     }
 
+    public void PlayerDied(KeyCode key)
+    {
+
+    }
+
     public void Update()
     {
         switch (CurrentGameState)

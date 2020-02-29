@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
     private float currentPlayerScale = 1.0f;
 
     private Dictionary<KeyCode, PlayerController> playerList = null;
+    private List<KeyCode> alivePlayers = null;
+    private Dictionary<KeyCode, int> score = null;
     private Dictionary<KeyCode, float> timeOfKeyUp = null;
 
     private List<KeyCode> playerKeysCurrentlyDown = null;
@@ -84,6 +86,7 @@ public class GameManager : MonoBehaviour
         LoadLevelPhase2,
         LoadLevelPhase3,
         Gameplay,
+        Win,
     }
 
     public GameState CurrentGameState { get; private set; }
@@ -97,6 +100,8 @@ public class GameManager : MonoBehaviour
         playerList = new Dictionary<KeyCode, PlayerController>();
         timeOfKeyUp = new Dictionary<KeyCode, float>();
         playerKeysCurrentlyDown = new List<KeyCode>();
+        alivePlayers = new List<KeyCode>();
+        score = new Dictionary<KeyCode, int>();
         UpdateState(GameState.Welcome);
     }
 
@@ -178,6 +183,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Gameplay:
                 FinishLoadLevel();
+                break;
+            case GameState.Win:
+                PlayerWon();
+                UpdateState(GameState.LoadLevelPhase1);
                 break;
             default:
                 break;
@@ -302,7 +311,10 @@ public class GameManager : MonoBehaviour
         // Freeze Players
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
+            player.Value.gameObject.SetActive(true);
             // player.Value.Freeze();
+            // player.Value.transform.position = levels[levelIndex].GetComponent<Level>().GetSpawnPoint(playerList.Count);
+            // player.Value.ShowScore(score[player.Key]);
         }
 
         // Disable current level walls
@@ -344,7 +356,9 @@ public class GameManager : MonoBehaviour
         // UnFreeze Players
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
+            // player.Value.HideScore(score[player.Key]);
             // player.Value.UnFreeze();
+            // player.Value.Reset()
         }
     }
 
@@ -438,7 +452,20 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied(KeyCode key)
     {
+        if (alivePlayers.Contains(key))
+        {
+            alivePlayers.Remove(key);
+        }
 
+        if (alivePlayers.Count == 1)
+        {
+            UpdateState(GameState.Win);
+        }
+    }
+
+    public void PlayerWon()
+    {
+        score[alivePlayers[0]] = score[alivePlayers[0]] + 1;
     }
 
     public void Update()

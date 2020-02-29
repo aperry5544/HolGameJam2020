@@ -106,16 +106,18 @@ public class GameManager : MonoBehaviour
         alivePlayers = new List<KeyCode>();
         score = new Dictionary<KeyCode, int>();
         currentMapSpawnPoses = new Dictionary<KeyCode, Vector2>();
-        currentPlayerDeathPoses = new Dictionary<KeyCode, Vector2>;
+        currentPlayerDeathPoses = new Dictionary<KeyCode, Vector2>();
         UpdateState(GameState.Welcome);
     }
 
     public void AddPlayer(KeyCode key)
     {
-        GameObject newPlayer = Instantiate(playerPrefab);
+        GameObject newPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         PlayerController pc = newPlayer.GetComponent<PlayerController>();
         playerList.Add(key, pc);
         pc.SetKeyCode(key);
+
+        currentPlayerDeathPoses[key] = Vector3.zero;
 
         Debug.Log(string.Format("Player {0} joined!", key));
     }
@@ -317,13 +319,14 @@ public class GameManager : MonoBehaviour
         Debug.Log(string.Format("Chose Level {0}", levelIndex));
 
         // Fetch new spawn poses for the players
-        List<Vector2> spawnPoses = new List<Vector2>();// levels[levelIndex].GetComponent<Level>().GetSpawnPoses(playerList.Count);
+        List<Vector2> spawnPoses = levels[levelIndex].GetComponent<Level>().GetSpawnPositions(playerList.Count);
 
         int poseIndex = 0;
         // Freeze Players
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
             currentMapSpawnPoses[player.Key] = spawnPoses[poseIndex++];
+            currentPlayerDeathPoses[player.Key] = new Vector2(playerList[player.Key].transform.position.x, playerList[player.Key].transform.position.y);
 
             player.Value.gameObject.SetActive(true);
             player.Value.Frozen = true;
@@ -372,6 +375,7 @@ public class GameManager : MonoBehaviour
             // player.Value.HideScore(score[player.Key]);
             player.Value.Frozen = false;
             player.Value.Reset();
+            player.Value.DeactivateFist();
         }
     }
 
@@ -471,12 +475,10 @@ public class GameManager : MonoBehaviour
         if (alivePlayers.Contains(key))
         {
             alivePlayers.Remove(key);
-            currentPlayerDeathPoses[key] = new Vector2(playerList[key].transform.position.x, playerList[key].transform.position.y);
         }
 
         if (alivePlayers.Count == 1)
         {
-            currentPlayerDeathPoses[key] = new Vector2(playerList[alivePlayers[0]].transform.position.x, playerList[alivePlayers[0]].transform.position.y);
             UpdateState(GameState.Win);
         }
     }

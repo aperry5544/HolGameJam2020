@@ -280,9 +280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a917ff863d5dc54981a794b8876ea76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fist: {fileID: 454933222}
+  shoulder: {fileID: 454933222}
+  fist: {fileID: 1905854273}
   fistVelocity: 5
-  fistRotation: 5
+  shoulderRotation: 500
+  fistDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &1445698856
 GameObject:
   m_ObjectHideFlags: 0

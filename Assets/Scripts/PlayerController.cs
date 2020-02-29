@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject shoulder;
+    private GameObject shoulder = null;
     [SerializeField]
-    private GameObject fist;
+    private GameObject fist = null;
 
     [SerializeField]
     private float fistVelocity = 5;

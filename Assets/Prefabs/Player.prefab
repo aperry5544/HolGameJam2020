@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 368991221983635372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 368991222613072394}
   m_RootOrder: 0
@@ -170,7 +170,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368991221983635372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -260,11 +260,14 @@ MonoBehaviour:
   playerKey: 32
   shoulder: {fileID: 368991222613072395}
   fist: {fileID: 368991221983635372}
-  fistVelocity: 2
-  shoulderRotation: 50
-  hitForce: 200
-  fistActivePos: 0.5
-  fistInactivePos: 0.4
+  fistCollider: {fileID: 368991221983635369}
+  fistVelocity: 5
+  damage: 0
+  hitSpeedMultiplyer: 0.1
+  hitSpeedDecreaseRate: 10
+  shoulderRotation: 450
+  fistActiveScale: 2
+  fistInactiveScale: 1
   fistDirection: {x: 0, y: 0, z: 0}
 --- !u!50 &568241654
 Rigidbody2D:

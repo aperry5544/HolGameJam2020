@@ -117,6 +117,16 @@ public class GameManager : MonoBehaviour
         playerList.Add(key, pc);
         pc.SetKeyCode(key);
 
+        // Get the spawn pose of the title screen
+        List<Vector2> spawnPoses = titleImage.gameObject.GetComponent<Level>().GetSpawnPositions(playerList.Count);
+
+        int i = 0;
+        // Update the position of all players
+        foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
+        {
+            player.Value.transform.position = spawnPoses[i++];
+        }
+
         currentPlayerDeathPoses[key] = Vector3.zero;
 
         Debug.Log(string.Format("Player {0} joined!", key));
@@ -129,6 +139,16 @@ public class GameManager : MonoBehaviour
             Destroy(playerList[key].gameObject);
         }
         playerList.Remove(key);
+
+        List<Vector2> spawnPoses = titleImage.gameObject.GetComponent<Level>().GetSpawnPositions(playerList.Count);
+
+        int i = 0;
+        // Update the position of all players
+        foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
+        {
+            player.Value.transform.position = spawnPoses[i++];
+        }
+
         Debug.Log(string.Format("Player {0} left!", key));
 
     }

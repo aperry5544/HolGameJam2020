@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour
     private float currentFade = 2.0f;
     private float currentPlayerScale = 1.0f;
 
+
+    private Dictionary<KeyCode, Vector2> currentMapSpawnPoses = null;
+    private Dictionary<KeyCode, Vector2> currentPlayerDeathPoses = null;
     private Dictionary<KeyCode, PlayerController> playerList = null;
     private List<KeyCode> alivePlayers = null;
     private Dictionary<KeyCode, int> score = null;
@@ -102,13 +105,18 @@ public class GameManager : MonoBehaviour
         playerKeysCurrentlyDown = new List<KeyCode>();
         alivePlayers = new List<KeyCode>();
         score = new Dictionary<KeyCode, int>();
+        currentMapSpawnPoses = new Dictionary<KeyCode, Vector2>();
+        currentPlayerDeathPoses = new Dictionary<KeyCode, Vector2>;
         UpdateState(GameState.Welcome);
     }
 
     public void AddPlayer(KeyCode key)
     {
         GameObject newPlayer = Instantiate(playerPrefab);
-        playerList.Add(key, newPlayer.GetComponent<PlayerController>());
+        PlayerController pc = newPlayer.GetComponent<PlayerController>();
+        playerList.Add(key, pc);
+        pc.SetKeyCode(key);
+
         Debug.Log(string.Format("Player {0} joined!", key));
     }
 
@@ -308,12 +316,17 @@ public class GameManager : MonoBehaviour
 
         Debug.Log(string.Format("Chose Level {0}", levelIndex));
 
+        // Fetch new spawn poses for the players
+        List<Vector2> spawnPoses = new List<Vector2>();// levels[levelIndex].GetComponent<Level>().GetSpawnPoses(playerList.Count);
+
+        int poseIndex = 0;
         // Freeze Players
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
+            currentMapSpawnPoses[player.Key] = spawnPoses[poseIndex++];
+
             player.Value.gameObject.SetActive(true);
-            // player.Value.Freeze();
-            // player.Value.transform.position = levels[levelIndex].GetComponent<Level>().GetSpawnPoint(playerList.Count);
+            player.Value.Frozen = true;
             // player.Value.ShowScore(score[player.Key]);
         }
 
@@ -357,8 +370,8 @@ public class GameManager : MonoBehaviour
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
             // player.Value.HideScore(score[player.Key]);
-            // player.Value.UnFreeze();
-            // player.Value.Reset()
+            player.Value.Frozen = false;
+            player.Value.Reset();
         }
     }
 
@@ -374,9 +387,12 @@ public class GameManager : MonoBehaviour
                 currentPlayerScale = playerRaiseScale;
             }
 
+            float t = (currentPlayerScale - 1) / (playerRaiseScale - 1);
+
             foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
             {
                 player.Value.transform.localScale = new Vector3(currentPlayerScale, currentPlayerScale, 1);
+                player.Value.transform.position = Vector3.Lerp(currentPlayerDeathPoses[player.Key], currentMapSpawnPoses[player.Key], t);
             }
 
             if (currentPlayerScale >= playerRaiseScale)
@@ -455,10 +471,12 @@ public class GameManager : MonoBehaviour
         if (alivePlayers.Contains(key))
         {
             alivePlayers.Remove(key);
+            currentPlayerDeathPoses[key] = new Vector2(playerList[key].transform.position.x, playerList[key].transform.position.y);
         }
 
         if (alivePlayers.Count == 1)
         {
+            currentPlayerDeathPoses[key] = new Vector2(playerList[alivePlayers[0]].transform.position.x, playerList[alivePlayers[0]].transform.position.y);
             UpdateState(GameState.Win);
         }
     }

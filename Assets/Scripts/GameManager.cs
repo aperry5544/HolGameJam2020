@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         PlayerController pc = newPlayer.GetComponent<PlayerController>();
         playerList.Add(key, pc);
+        score[key] = 0;
         pc.SetKeyCode(key);
 
         // Get the spawn pose of the title screen
@@ -172,6 +173,8 @@ public class GameManager : MonoBehaviour
 
     private void UpdateState(GameState newState)
     {
+        CurrentGameState = newState;
+
         switch (newState)
         {
             case GameState.Welcome:
@@ -221,8 +224,6 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-
-        CurrentGameState = newState;
     }
 
     private void WelcomeUpdate()
@@ -336,10 +337,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Debug.Log(string.Format("Chose Level {0}", levelIndex));
-
         // Fetch new spawn poses for the players
         List<Vector2> spawnPoses = levels[levelIndex].GetComponent<Level>().GetSpawnPositions(playerList.Count);
+
+        alivePlayers.Clear();
 
         int poseIndex = 0;
         // Freeze Players
@@ -347,10 +348,12 @@ public class GameManager : MonoBehaviour
         {
             currentMapSpawnPoses[player.Key] = spawnPoses[poseIndex++];
             currentPlayerDeathPoses[player.Key] = new Vector2(playerList[player.Key].transform.position.x, playerList[player.Key].transform.position.y);
+            alivePlayers.Add(player.Key);
 
             player.Value.gameObject.SetActive(true);
+            player.Value.Reset();
             player.Value.Frozen = true;
-            // player.Value.ShowScore(score[player.Key]);
+            player.Value.ShowWins(score[player.Key]);
         }
 
         // Disable current level walls
@@ -359,12 +362,12 @@ public class GameManager : MonoBehaviour
             levels[currentLevel].GetComponent<Level>().DisableLevelPhysics(); 
         }
 
-        // Enable the next level
-        levels[levelIndex].gameObject.SetActive(true);
 
         // Diable physics on next level
         if (levelIndex > -1)
         {
+            // Enable the next level
+            levels[levelIndex].gameObject.SetActive(true);
             levels[levelIndex].GetComponent<Level>().DisableLevelPhysics();
         }
 
@@ -392,7 +395,7 @@ public class GameManager : MonoBehaviour
         // UnFreeze Players
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
-            // player.Value.HideScore(score[player.Key]);
+            player.Value.HideWins();
             player.Value.Frozen = false;
             player.Value.Reset();
             player.Value.DeactivateFist();
@@ -532,6 +535,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Gameplay:
                 GameplayUpdate();
+                break;
+            case GameState.Win:
                 break;
             default:
                 break;

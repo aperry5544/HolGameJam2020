@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
     [SerializeField]
     private Vector2 circleCenter = new Vector2(); 
 
-    void Start()
+    void OnEnable()
     {
         allLevelRigidbodies = gameObject.GetComponentsInChildren<Rigidbody2D>();
         allLevelColliders = gameObject.GetComponentsInChildren<Collider2D>();

@@ -163,8 +163,8 @@ public class PlayerController : MonoBehaviour
             thisCollider.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Reset();
+            gameObject.SetActive(false);
             GameManager.Instance.PlayerDied(playerKey);
-            enabled = false;
         }
         else
         {

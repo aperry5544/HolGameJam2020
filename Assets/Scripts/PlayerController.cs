@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float damage = 0;
+    [SerializeField]
+    private float initialHitSpeed = 20;
 
     private float hitSpeed = 0;
     [SerializeField]
@@ -117,7 +119,7 @@ public class PlayerController : MonoBehaviour
             shoulder.transform.Rotate(new Vector3(0, 0, angle));
             damage += 20;
             hitDirection = collision.GetContact(0).normal;
-            hitSpeed = damage * hitSpeedMultiplyer;
+            hitSpeed = initialHitSpeed + damage * hitSpeedMultiplyer;
 
         }
         //Hit Other
@@ -125,6 +127,13 @@ public class PlayerController : MonoBehaviour
             thisCollider.gameObject.layer == LayerMask.NameToLayer("Fist"))
         {
 
+        }
+        else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("OutOfBounds") &&
+            thisCollider.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            damage = 0;
+            hitSpeed = 0;
+            transform.position = new Vector3(0, 0, 0);            
         }
         else
         {

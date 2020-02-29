@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -47,6 +48,9 @@ public class PlayerController : MonoBehaviour
         get { return frozen; }
         set { frozen = value; }
     }
+
+    [SerializeField]
+    private TextMeshProUGUI winText = null;
     
     public void SetKeyCode(KeyCode keyCode)
     {
@@ -73,6 +77,17 @@ public class PlayerController : MonoBehaviour
         hitSpeed = 0;
     }
 
+    public void ShowWins(int numberOfWins)
+    {
+        winText.text = numberOfWins.ToString();
+        winText.enabled = true;
+    }
+
+    public void HideWins()
+    {
+        winText.enabled = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -80,17 +95,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
-        if(Input.GetKeyDown(playerKey))
-        {
-            ActivateFist();
-        }
-
-        if (Input.GetKeyUp(playerKey))
-        {
-            DeactivateFist();
-        }
-
 
         if(active)
         {

@@ -130,12 +130,12 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(player.Key))
             {
-                player.Value.Activate();
+                player.Value.ActivateFist();
             }
 
             if (Input.GetKeyUp(player.Key))
             {
-                player.Value.Deactivate();
+                player.Value.DeactivateFist();
             }
         }
     }

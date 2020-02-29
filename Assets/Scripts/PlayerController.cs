@@ -2,8 +2,11 @@
 
 public class PlayerController : MonoBehaviour
 {
+    //Controls
     [SerializeField]
     private KeyCode playerKey = KeyCode.A;
+
+    //Parts
     [SerializeField]
     private GameObject shoulder = null;
     [SerializeField]
@@ -11,9 +14,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Collider2D fistCollider = null;
 
+    //Fist Properties
+    private bool active = false;
+    [SerializeField]
+    private Vector3 fistDirection;
     [SerializeField]
     private float fistVelocity = 5;
+    [SerializeField]
+    private float shoulderRotation = 5;
+    [SerializeField]
+    private float fistActiveScale = 2;
+    [SerializeField]
+    private float fistInactiveScale = 1;
 
+    //Health Properties
     [SerializeField]
     private float damage = 0;
     [SerializeField]
@@ -26,43 +40,55 @@ public class PlayerController : MonoBehaviour
     private float hitSpeedDecreaseRate = 0;
     private Vector2 hitDirection;
 
-    [SerializeField]
-    private float shoulderRotation = 5;
+    //Freeze Property
+    private bool frozen = false;
+    public bool Frozen
+    {
+        get { return frozen; }
+        set { frozen = value; }
+    }
+    
+    public void SetKeyCode(KeyCode keyCode)
+    {
+        playerKey = keyCode;
+    }
 
-    [SerializeField]
-    private float fistActiveScale = 2;
-    [SerializeField]
-    private float fistInactiveScale = 1;
-
-    private bool active = false;
-
-    [SerializeField]
-    private Vector3 fistDirection;
-
-    public void Activate()
+    public void ActivateFist()
     {
         active = true;
+        fist.transform.localScale = new Vector3(fistActiveScale, fistActiveScale, fistActiveScale);
+        fistCollider.enabled = true;
     }
-    public void Deactivate()
+
+    public void DeactivateFist()
     {
         active = false;
+        fist.transform.localScale = new Vector3(fistInactiveScale, fistInactiveScale, fistInactiveScale);
+        fistCollider.enabled = false;
+    }
+
+    public void Reset()
+    {
+        damage = 0;
+        hitSpeed = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(frozen)
+        {
+            return;
+        }
+
         if(Input.GetKeyDown(playerKey))
         {
-            fist.transform.localScale = new Vector3(fistActiveScale, fistActiveScale, fistActiveScale);
-            fistCollider.enabled = true;
-            active = true;
+            ActivateFist();
         }
 
         if (Input.GetKeyUp(playerKey))
         {
-            fist.transform.localScale = new Vector3(fistInactiveScale, fistInactiveScale, fistInactiveScale);
-            fistCollider.enabled = false;
-            active = false;
+            DeactivateFist();
         }
 
 
@@ -128,12 +154,13 @@ public class PlayerController : MonoBehaviour
         {
 
         }
+        //OutOfBounds
         else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("OutOfBounds") &&
             thisCollider.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            damage = 0;
-            hitSpeed = 0;
-            transform.position = new Vector3(0, 0, 0);            
+            Reset();
+            GameManager.Instance.PlayerDied(playerKey);
+            enabled = false;
         }
         else
         {

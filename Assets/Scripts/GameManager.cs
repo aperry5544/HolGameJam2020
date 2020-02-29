@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Welcome:
                 currentWelcome = welcomeDuration;
-                currentFade = fadeDuration;
                 splashImage.enabled = true;
                 splashText.enabled = true;
                 titleText.enabled = false;
@@ -128,17 +127,27 @@ public class GameManager : MonoBehaviour
                 gameStartText.enabled = false;
                 break;
             case GameState.Fade:
+                currentFade = fadeDuration;
+                splashImage.enabled = true;
+                splashText.enabled = true;
+                titleText.enabled = false;
+                titleImage.enabled = false;
+                gameStartText.enabled = false;
                 break;
             case GameState.Title:
+                currentGameStartTime = gameStartTime;
                 splashText.enabled = false;
                 splashImage.enabled = false;
                 titleText.enabled = true;
                 titleImage.enabled = true;
                 gameStartText.enabled = false;
-                currentGameStartTime = gameStartTime;
                 break;
             case GameState.Gameplay:
-                Debug.Log("Loading Gameplay...");
+                splashImage.enabled = false;
+                splashText.enabled = false;
+                titleText.enabled = false;
+                titleImage.enabled = false;
+                gameStartText.enabled = false;
                 break;
             default:
                 break;

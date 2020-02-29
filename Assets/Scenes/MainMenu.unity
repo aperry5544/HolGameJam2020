@@ -735,7 +735,7 @@ MonoBehaviour:
   fadeDuration: 1
   doubleClickTimeout: 0.2
   gameStartTime: 5
-  playerPrefab: {fileID: 6388137551599044581, guid: 7a7d4fc454f6a994ca475408b699d1a4,
+  playerPrefab: {fileID: 368991222793358616, guid: 19247224b172ce54db81dc0cef85196a,
     type: 3}
 --- !u!1 &1915700290
 GameObject:

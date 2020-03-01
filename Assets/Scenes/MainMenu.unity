@@ -1920,6 +1920,7 @@ MonoBehaviour:
   levelMoveDistance: 20
   levelMoveSpeed: 15
   playerRaiseScale: 2
+  winnerRaiseScale: 5
   playerRaiseScaleSpeed: 5
   playerArt:
   - headNormal: {fileID: 21300000, guid: 8c07be2b049fbd34ea25116b7bec4691, type: 3}

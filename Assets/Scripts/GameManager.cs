@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Range(1.1f, 10)]
     private float playerRaiseScale = 1.5f;
+    [SerializeField]
+    [Range(1.1f, 10)]
+    private float winnerRaiseScale = 3f;
 
     [SerializeField]
     private float playerRaiseScaleSpeed = 10.0f;
@@ -634,19 +637,19 @@ public class GameManager : MonoBehaviour
         // Raise players
         currentPlayerScale += playerRaiseScaleSpeed * Time.deltaTime;
 
-        if (currentPlayerScale >= playerRaiseScale)
+        if (currentPlayerScale >= winnerRaiseScale)
         {
-            currentPlayerScale = playerRaiseScale;
+            currentPlayerScale = winnerRaiseScale;
         }
 
-        float t = (currentPlayerScale - 1) / (playerRaiseScale - 1);
+        float t = (currentPlayerScale - 1) / (winnerRaiseScale - 1);
 
         playerList[winningPlayer].transform.localScale = new Vector3(currentPlayerScale, currentPlayerScale, 1);
-        playerList[winningPlayer].transform.position = Vector3.Lerp(currentPlayerDeathPoses[winningPlayer], Vector2.zero, t);
+        playerList[winningPlayer].transform.position = Vector3.Lerp(currentPlayerDeathPoses[winningPlayer], new Vector2(0, -1f), t);
 
-        if (currentPlayerScale >= playerRaiseScale)
+        if (currentPlayerScale >= winnerRaiseScale)
         {
-            currentPlayerScale = playerRaiseScale;
+            currentPlayerScale = winnerRaiseScale;
             UpdateState(GameState.EndGamePhase2);
         }
     }

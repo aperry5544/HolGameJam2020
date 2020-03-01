@@ -1361,7 +1361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c018328e9065f5049825f6c56e302c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suddenDeathTime: 20
+  suddenDeathTime: 10
   startPace: 5
   finalPace: 0.25
   travelTime: 1

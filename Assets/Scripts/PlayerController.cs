@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
     public void ShowWins(int numberOfWins)
     {
-        winText.text = numberOfWins.ToString();
+        winText.text = string.Format("{0} Wins", numberOfWins.ToString());
         winText.enabled = true;
     }
 

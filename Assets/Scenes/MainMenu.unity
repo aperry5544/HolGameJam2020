@@ -1862,6 +1862,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RamenVille
       objectReference: {fileID: 0}
+    - target: {fileID: 3239077068312353720, guid: 44fc7ad276375864186f4d58f97e67c3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3239077068312353723, guid: 44fc7ad276375864186f4d58f97e67c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1937,6 +1942,75 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1057639743619657844}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2780092743302125595
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642385, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819845256290642386, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+        type: 3}
+      propertyPath: m_Name
+      value: DoggoLand
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 67e28450667b86c4d8b93ae8c3a424ff, type: 3}
 --- !u!1001 &3472677461244675951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2169,6 +2243,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SushiWorld
       objectReference: {fileID: 0}
+    - target: {fileID: 3790020263174744218, guid: 63fd44903fa186942839be0193c59888,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3790020263767895726, guid: 63fd44903fa186942839be0193c59888,
         type: 3}
       propertyPath: m_Sprite
@@ -2184,9 +2263,9 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 63fd44903fa186942839be0193c59888, type: 3}
 --- !u!1 &7239351852740129225 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1979794371067738565, guid: 67e28450667b86c4d8b93ae8c3a424ff,
+  m_CorrespondingSourceObject: {fileID: 4819845256290642386, guid: 67e28450667b86c4d8b93ae8c3a424ff,
     type: 3}
-  m_PrefabInstance: {fileID: 9155532556864276492}
+  m_PrefabInstance: {fileID: 2780092743302125595}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7239351852910497979 stripped
 GameObject:
@@ -2200,83 +2279,3 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5832024623047564655}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &9155532556864276492
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1979794370545958897, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f0c8839b7b9688440a792a47722a7981,
-        type: 3}
-    - target: {fileID: 1979794370545958897, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738565, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_Name
-      value: DoggoLand
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 19.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 67e28450667b86c4d8b93ae8c3a424ff, type: 3}

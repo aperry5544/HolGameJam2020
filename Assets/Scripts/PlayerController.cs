@@ -417,7 +417,6 @@ public class PlayerController : MonoBehaviour
         armRenderer.color = newColor;
         bodyRenderer.color = newColor;
         fistRenderer.color = newColor;
-        Debug.Log(string.Format("({0}) : {1}", name, newColor));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

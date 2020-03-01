@@ -17,7 +17,7 @@ public class HazardManager : MonoBehaviour
     private float travelTime = 5.0f;
 
     [SerializeField]
-    private AnimationCurve angle;
+    private AnimationCurve angle = null;
 
     [SerializeField]
     private GameObject hazardPrefab = null;

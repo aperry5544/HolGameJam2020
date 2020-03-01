@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer titleImage = null;
+
+    [SerializeField]
+    private SpriteRenderer winnerImage = null;
 
     [SerializeField]
     private GameObject startCounterCoverup = null;
@@ -62,6 +66,10 @@ public class GameManager : MonoBehaviour
     private Dictionary<KeyCode, PlayerController> playerList = null;
     private List<KeyCode> alivePlayers = null;
     private Dictionary<KeyCode, int> score = null;
+    [SerializeField]
+    private int targetScore = 3;
+    private bool gameEnd = false;
+    private KeyCode winningPlayer;
     private Dictionary<KeyCode, float> timeOfKeyUp = null;
 
     private List<KeyCode> playerKeysCurrentlyDown = null;
@@ -91,6 +99,8 @@ public class GameManager : MonoBehaviour
         LoadLevelPhase3,
         Gameplay,
         Win,
+        EndGamePhase1,
+        EndGamePhase2,
     }
 
     public GameState CurrentGameState { get; private set; }
@@ -100,7 +110,6 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        DontDestroyOnLoad(gameObject);
         playerList = new Dictionary<KeyCode, PlayerController>();
         timeOfKeyUp = new Dictionary<KeyCode, float>();
         playerKeysCurrentlyDown = new List<KeyCode>();
@@ -182,6 +191,7 @@ public class GameManager : MonoBehaviour
                 currentWelcome = welcomeDuration;
                 splashImage.enabled = true;
                 titleImage.enabled = false;
+                winnerImage.enabled = false;
                 gameStartText.enabled = false;
                 startCounterCoverup.SetActive(false);
                 break;
@@ -189,6 +199,7 @@ public class GameManager : MonoBehaviour
                 currentFade = fadeDuration;
                 splashImage.enabled = true;
                 titleImage.enabled = false;
+                winnerImage.enabled = false;
                 gameStartText.enabled = false;
                 startCounterCoverup.SetActive(false);
                 break;
@@ -196,12 +207,14 @@ public class GameManager : MonoBehaviour
                 currentGameStartTime = gameStartTime;
                 splashImage.enabled = false;
                 titleImage.enabled = true;
+                winnerImage.enabled = false;
                 gameStartText.enabled = false;
                 startCounterCoverup.SetActive(false);
                 break;
             case GameState.LoadLevelPhase1:
                 splashImage.enabled = false;
                 titleImage.enabled = false;
+                winnerImage.enabled = false;
                 gameStartText.enabled = false;
                 startCounterCoverup.SetActive(false);
                 currentPlayerScale = 1;
@@ -216,9 +229,27 @@ public class GameManager : MonoBehaviour
                 HazardManager.Instance.StartRound();
                 break;
             case GameState.Win:
-                PlayerWon();
-                UpdateState(GameState.LoadLevelPhase1);
                 HazardManager.Instance.EndRound();
+                PlayerWon();
+                if(gameEnd)
+                {
+                    UpdateState(GameState.EndGamePhase1);
+                }
+                else
+                {
+                    UpdateState(GameState.LoadLevelPhase1);
+                }
+                break;
+            case GameState.EndGamePhase1:
+                splashImage.enabled = false;
+                titleImage.enabled = false;
+                winnerImage.enabled = true;
+                gameStartText.enabled = false;
+                startCounterCoverup.SetActive(false);
+                StopGame();
+                break;
+            case GameState.EndGamePhase2:
+                
                 break;
             default:
                 break;
@@ -538,6 +569,11 @@ public class GameManager : MonoBehaviour
     public void PlayerWon()
     {
         score[alivePlayers[0]] = score[alivePlayers[0]] + 1;
+        if (score[alivePlayers[0]] >= targetScore)
+        {
+            gameEnd = true;
+            winningPlayer = alivePlayers[0];
+        }
     }
 
     public void Update()
@@ -567,8 +603,58 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Win:
                 break;
+            case GameState.EndGamePhase1:
+                RaiseWinner();
+                break;
+            case GameState.EndGamePhase2:
+                EndGameUpdate();
+                break;
             default:
                 break;
+        }
+    }
+
+    private void RaiseWinner()
+    {
+        // Raise players
+        currentPlayerScale += playerRaiseScaleSpeed * Time.deltaTime;
+
+        if (currentPlayerScale >= playerRaiseScale)
+        {
+            currentPlayerScale = playerRaiseScale;
+        }
+
+        float t = (currentPlayerScale - 1) / (playerRaiseScale - 1);
+
+        playerList[winningPlayer].transform.localScale = new Vector3(currentPlayerScale, currentPlayerScale, 1);
+        playerList[winningPlayer].transform.position = Vector3.Lerp(currentPlayerDeathPoses[winningPlayer], Vector2.zero, t);
+
+        if (currentPlayerScale >= playerRaiseScale)
+        {
+            currentPlayerScale = playerRaiseScale;
+            UpdateState(GameState.EndGamePhase2);
+        }
+    }
+
+    private void EndGameUpdate()
+    {
+        if(Input.anyKeyDown)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
+    private void StopGame()
+    {
+        foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
+        {
+            player.Value.Frozen = true;
+        }
+
+        // Disable current level walls
+        if (currentLevel > -1)
+        {
+            levels[currentLevel].GetComponent<Level>().DisableLevelPhysics();
         }
     }
 }

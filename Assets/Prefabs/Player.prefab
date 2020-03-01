@@ -697,7 +697,7 @@ MonoBehaviour:
   fistCollider: {fileID: 368991221983635369}
   fistDirection: {x: 0, y: 0, z: 0}
   fistVelocity: 7.5
-  shoulderRotation: 450
+  shoulderRotation: 500
   fistActiveScale: 2
   fistInactiveScale: 1
   hurtFaceTimer: 1

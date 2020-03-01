@@ -460,6 +460,22 @@ public class PlayerController : MonoBehaviour
             SetVisibility(false);
             GameManager.Instance.PlayerDied(playerKey);
         }
+        //Hazard
+        else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Hazard") &&
+            thisCollider.gameObject.layer == LayerMask.NameToLayer("Body"))
+        {
+            ContactPoint2D contact = collision.GetContact(0);
+
+            float angle = Vector2.SignedAngle(fist.transform.position - transform.position, collision.GetContact(0).normal);
+            shoulder.transform.Rotate(new Vector3(0, 0, angle));
+            damage += 20;
+            hitDirection = collision.GetContact(0).normal;
+            hitSpeed = initialHitSpeed + damage * hitSpeedMultiplyer * 2f;
+            HitDecalManager.Instance.BodyHit(collision.GetContact(0).point);
+            PlayHurtSound();
+            timeLeftOnHurtOverride = hurtFaceTimer;
+            targetRedLevel = damage * 0.01f * 255;
+        }
         else
         {
             ContactPoint2D contact = collision.GetContact(0);

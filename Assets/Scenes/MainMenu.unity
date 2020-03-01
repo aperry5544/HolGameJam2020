@@ -1361,10 +1361,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c018328e9065f5049825f6c56e302c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suddenDeathTime: 3
+  suddenDeathTime: 20
   startPace: 5
-  finalPace: 1
-  travelTime: 3
+  finalPace: 0.25
+  travelTime: 1
   hazardPrefab: {fileID: 6953399099687287523, guid: bdd0eddc361ffa943a1837e5a39fa39c,
     type: 3}
   shadowPrefab: {fileID: 599011846856790741, guid: da828dbbb129bf748bc8459bce305e84,

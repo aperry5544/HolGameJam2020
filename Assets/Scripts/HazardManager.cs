@@ -29,7 +29,6 @@ public class HazardManager : MonoBehaviour
     private float lastTime = 0.0f;
 
     private float roundStartTime = 0.0f;
-    private float timeScale = 0.0f;
 
     private List<HazardController> hazardList;
     private List<GameObject> shadowList;
@@ -92,8 +91,7 @@ public class HazardManager : MonoBehaviour
         }
         if (!isMaxSpeed)
         {
-            timeScale += Time.deltaTime;
-            curPace = Mathf.Lerp(startPace, finalPace, timeScale);
+            curPace -= 0.001f;
 
             if (curPace <= finalPace)
             {
@@ -105,9 +103,9 @@ public class HazardManager : MonoBehaviour
 
     public void StartRound()
     {
-        timeScale = 0.0f;
         roundStartTime = Time.time;
         curPace = startPace;
+        isMaxSpeed = false;
     }
 
     public void EndRound()
@@ -122,7 +120,18 @@ public class HazardManager : MonoBehaviour
                 }
             }
         }
+        if (shadowList.Count > 0)
+        {
+            for (int i = 0; i < shadowList.Count; i++)
+            {
+                if (shadowList[i] != null)
+                {
+                    Destroy(shadowList[i].gameObject);
+                }
+            }
+        }
 
         hazardList.Clear();
+        shadowList.Clear();
     }
 }

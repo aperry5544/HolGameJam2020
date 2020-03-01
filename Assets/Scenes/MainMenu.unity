@@ -1712,44 +1712,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c018328e9065f5049825f6c56e302c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suddenDeathTime: 30
+  suddenDeathTime: 3
   startPace: 5
   finalPace: 1
-  travelTime: 5
-  angle:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.000001871027
-      value: 0.000015258789
-      inSlope: -1.8944007
-      outSlope: -1.8944007
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.48725885
-    - serializedVersion: 3
-      time: 0.2
-      value: -0.2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2.078179
-      outSlope: 2.078179
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.19462414
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  travelTime: 3
   hazardPrefab: {fileID: 6953399099687287523, guid: bdd0eddc361ffa943a1837e5a39fa39c,
+    type: 3}
+  shadowPrefab: {fileID: 599011846856790741, guid: da828dbbb129bf748bc8459bce305e84,
     type: 3}
 --- !u!4 &1807390202
 Transform:

@@ -697,7 +697,7 @@ MonoBehaviour:
   fistCollider: {fileID: 368991221983635369}
   fistDirection: {x: 0, y: 0, z: 0}
   fistVelocity: 7.5
-  shoulderRotation: 450
+  shoulderRotation: 500
   fistActiveScale: 2
   fistInactiveScale: 1
   hurtFaceTimer: 1
@@ -706,8 +706,6 @@ MonoBehaviour:
   hitSpeedMultiplyer: 0.1
   hitSpeedDecreaseRate: 10
   redPulseSpeed: 500
-  particleTransform: {fileID: 0}
-  deathParticles: {fileID: 0}
   winText: {fileID: 1879228442}
   keyCodeText: {fileID: 204860878}
   punchAudioClips:

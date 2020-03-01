@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitDecal (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3955684033384660257, guid: 9829224540467fe4e9ec6162f256cbaf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9829224540467fe4e9ec6162f256cbaf, type: 3}
 --- !u!4 &6149061743485139160 stripped
@@ -219,6 +224,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HitDecal (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955684033384660257, guid: 9829224540467fe4e9ec6162f256cbaf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9829224540467fe4e9ec6162f256cbaf, type: 3}
@@ -307,6 +317,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitDecal
       objectReference: {fileID: 0}
+    - target: {fileID: 3955684033384660257, guid: 9829224540467fe4e9ec6162f256cbaf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9829224540467fe4e9ec6162f256cbaf, type: 3}
 --- !u!4 &6149061743793980363 stripped
@@ -393,6 +408,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HitDecal (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955684033384660257, guid: 9829224540467fe4e9ec6162f256cbaf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9829224540467fe4e9ec6162f256cbaf, type: 3}
@@ -481,6 +501,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitDecal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3955684033384660257, guid: 9829224540467fe4e9ec6162f256cbaf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9829224540467fe4e9ec6162f256cbaf, type: 3}
 --- !u!4 &6149061744629818500 stripped
@@ -567,6 +592,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HitDecal (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955684033384660257, guid: 9829224540467fe4e9ec6162f256cbaf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9829224540467fe4e9ec6162f256cbaf, type: 3}

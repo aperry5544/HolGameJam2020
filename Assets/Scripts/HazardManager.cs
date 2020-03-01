@@ -48,7 +48,6 @@ public class HazardManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         curPace = startPace;
         hazardList = new List<HazardController>();
-        angle = new AnimationCurve();
         lastTime = Time.time;
     }
 

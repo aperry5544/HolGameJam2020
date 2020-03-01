@@ -7,16 +7,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private Text splashText = null;
+    private SpriteRenderer splashImage = null;
 
     [SerializeField]
-    private Image splashImage = null;
+    private SpriteRenderer titleImage = null;
 
     [SerializeField]
-    private Text titleText = null;
-
-    [SerializeField]
-    private Image titleImage = null;
+    private GameObject startCounterCoverup = null;
 
     [SerializeField]
     private Text gameStartText = null;
@@ -184,33 +181,29 @@ public class GameManager : MonoBehaviour
             case GameState.Welcome:
                 currentWelcome = welcomeDuration;
                 splashImage.enabled = true;
-                splashText.enabled = true;
-                titleText.enabled = false;
                 titleImage.enabled = false;
                 gameStartText.enabled = false;
+                startCounterCoverup.SetActive(false);
                 break;
             case GameState.Fade:
                 currentFade = fadeDuration;
                 splashImage.enabled = true;
-                splashText.enabled = true;
-                titleText.enabled = false;
                 titleImage.enabled = false;
                 gameStartText.enabled = false;
+                startCounterCoverup.SetActive(false);
                 break;
             case GameState.Title:
                 currentGameStartTime = gameStartTime;
-                splashText.enabled = false;
                 splashImage.enabled = false;
-                titleText.enabled = true;
                 titleImage.enabled = true;
                 gameStartText.enabled = false;
+                startCounterCoverup.SetActive(false);
                 break;
             case GameState.LoadLevelPhase1:
                 splashImage.enabled = false;
-                splashText.enabled = false;
-                titleText.enabled = false;
                 titleImage.enabled = false;
                 gameStartText.enabled = false;
+                startCounterCoverup.SetActive(false);
                 currentPlayerScale = 1;
                 BeginLoadLevel();
                 break;
@@ -251,8 +244,6 @@ public class GameManager : MonoBehaviour
             currentFade -= Time.deltaTime;
 
             float percentageComplete = (1 - Mathf.Clamp01(currentFade / (fadeDuration))) * 1.25f;
-
-            splashText.color = Color.Lerp(Color.black, Color.white, percentageComplete);
         }
         else
         {
@@ -340,6 +331,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerKeysCurrentlyDown.Count == playerList.Count && playerList.Count > 1)
         {
+            startCounterCoverup.SetActive(true);
             gameStartText.enabled = true;
 
             currentGameStartTime -= Time.deltaTime;
@@ -356,6 +348,7 @@ public class GameManager : MonoBehaviour
         {
             currentGameStartTime = gameStartTime;
             gameStartText.enabled = false;
+            startCounterCoverup.SetActive(false);
         }
     }
 

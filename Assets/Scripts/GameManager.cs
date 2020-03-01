@@ -382,9 +382,8 @@ public class GameManager : MonoBehaviour
             currentPlayerDeathPoses[player.Key] = new Vector2(playerList[player.Key].transform.position.x, playerList[player.Key].transform.position.y);
             alivePlayers.Add(player.Key);
 
-            player.Value.gameObject.SetActive(true);
-            player.Value.Reset();
             player.Value.Frozen = true;
+            player.Value.SetVisibility(true);
             player.Value.ShowWins(score[player.Key]);
         }
 
@@ -428,8 +427,8 @@ public class GameManager : MonoBehaviour
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
             player.Value.HideWins();
-            player.Value.Frozen = false;
             player.Value.Reset();
+            player.Value.Frozen = false;
             player.Value.DeactivateFist();
         }
     }

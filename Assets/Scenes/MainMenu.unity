@@ -1691,7 +1691,7 @@ MonoBehaviour:
     fist: {fileID: 21300000, guid: 231f04e22f2679c42a3e0df5b2f62174, type: 3}
   - headNormal: {fileID: 21300000, guid: 6ee3bfc4fadd9b54783e7368c82b2eed, type: 3}
     headNormalOffsett: {x: -0.003, y: 0.112, z: -0.03}
-    headHurt: {fileID: 21300000, guid: 6ee3bfc4fadd9b54783e7368c82b2eed, type: 3}
+    headHurt: {fileID: 21300000, guid: 05db34a14e34aa04da2d23d54eb2f66e, type: 3}
     headHurtOffsett: {x: -0.003, y: 0.112, z: -0.03}
     headLeft: {fileID: 21300000, guid: e0dfa8b1a6fd73d438631dae4493eccc, type: 3}
     headLeftOffsett: {x: -0.003, y: 0.112, z: -0.03}
@@ -1702,7 +1702,7 @@ MonoBehaviour:
     fist: {fileID: 21300000, guid: 231f04e22f2679c42a3e0df5b2f62174, type: 3}
   - headNormal: {fileID: 21300000, guid: 9789a3f9b0c91b648bb9600255005496, type: 3}
     headNormalOffsett: {x: -0.003, y: 0.112, z: -0.03}
-    headHurt: {fileID: 21300000, guid: 9789a3f9b0c91b648bb9600255005496, type: 3}
+    headHurt: {fileID: 21300000, guid: 05db34a14e34aa04da2d23d54eb2f66e, type: 3}
     headHurtOffsett: {x: -0.003, y: 0.112, z: -0.03}
     headLeft: {fileID: 21300000, guid: 822a273f0fcb13a42a0f3447c995e9c9, type: 3}
     headLeftOffsett: {x: -0.003, y: 0.112, z: -0.03}
@@ -1713,7 +1713,7 @@ MonoBehaviour:
     fist: {fileID: 21300000, guid: 6c4b80730b0427842b27e8c202b927de, type: 3}
   - headNormal: {fileID: 21300000, guid: c3bec5d50c1e3d64d9c612b69653e3ab, type: 3}
     headNormalOffsett: {x: -0.003, y: 0.112, z: -0.03}
-    headHurt: {fileID: 21300000, guid: c3bec5d50c1e3d64d9c612b69653e3ab, type: 3}
+    headHurt: {fileID: 21300000, guid: 05db34a14e34aa04da2d23d54eb2f66e, type: 3}
     headHurtOffsett: {x: -0.003, y: 0.112, z: -0.03}
     headLeft: {fileID: 21300000, guid: 51346e6b2ec37264fa83305bba31474e, type: 3}
     headLeftOffsett: {x: -0.003, y: 0.112, z: -0.03}

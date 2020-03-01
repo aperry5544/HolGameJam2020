@@ -220,10 +220,12 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Gameplay:
                 FinishLoadLevel();
+                HazardManager.Instance.StartRound();
                 break;
             case GameState.Win:
                 PlayerWon();
                 UpdateState(GameState.LoadLevelPhase1);
+                HazardManager.Instance.EndRound();
                 break;
             default:
                 break;
@@ -385,9 +387,8 @@ public class GameManager : MonoBehaviour
             currentPlayerDeathPoses[player.Key] = new Vector2(playerList[player.Key].transform.position.x, playerList[player.Key].transform.position.y);
             alivePlayers.Add(player.Key);
 
-            player.Value.gameObject.SetActive(true);
-            player.Value.Reset();
             player.Value.Frozen = true;
+            player.Value.SetVisibility(true);
             player.Value.ShowWins(score[player.Key]);
         }
 
@@ -426,13 +427,12 @@ public class GameManager : MonoBehaviour
             levels[previousLevel].gameObject.SetActive(false);
         }
 
-
         // UnFreeze Players
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
             player.Value.HideWins();
-            player.Value.Frozen = false;
             player.Value.Reset();
+            player.Value.Frozen = false;
             player.Value.DeactivateFist();
         }
     }
@@ -526,6 +526,7 @@ public class GameManager : MonoBehaviour
     private void GameplayUpdate()
     {
         CheckForPlayerInput();
+        HazardManager.Instance.Active();
     }
 
     public void PlayerDied(KeyCode key)

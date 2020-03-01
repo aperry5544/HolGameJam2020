@@ -24,8 +24,9 @@ public class HazardController : MonoBehaviour
     {
         spawnPoint = _pos;
         curve = _animCurve;
-        transform.position = new Vector2(spawnPoint.x + Random.Range(minTravel, maxTravel), spawnPoint.y + dropHeight);
+        transform.position = new Vector3(spawnPoint.x + Random.Range(minTravel, maxTravel), spawnPoint.y + dropHeight, 0f);
         startTime = curTime = Time.time;
+        Debug.Log("SpawnPoint: " + spawnPoint.ToString() + "\nRealPoint: " + transform.position.ToString());
     }
 
     public void DoUpdate()

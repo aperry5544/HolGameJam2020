@@ -8,10 +8,10 @@ public class HazardManager : MonoBehaviour
     private float suddenDeathTime = 30f;
 
     [SerializeField]
-    private float startPace = 2.0f;
+    private float startPace = 5.0f;
 
     [SerializeField]
-    private float finalPace = 0.5f;
+    private float finalPace = 1.0f;
 
     [SerializeField]
     private AnimationCurve angle;
@@ -70,8 +70,9 @@ public class HazardManager : MonoBehaviour
             HazardController newHazard = newObj.GetComponent<HazardController>();
             hazardList.Add(newHazard);
 
-            Vector2 spawnPoint = new Vector2(Random.Range(0, Screen.width), Random.Range(0, Screen.height));
+            Vector2 spawnPoint = new Vector2(Random.Range(-10f, 10f), Random.Range(-5f, 5f));
             newHazard.Initialize(spawnPoint, angle);
+            shouldSpawn = false;
         }
         for (int i = 0; i < hazardList.Count; i++)
         {
@@ -103,7 +104,7 @@ public class HazardManager : MonoBehaviour
             {
                 if (hazardList[i] != null)
                 {
-                    Destroy(hazardList[i]);
+                    Destroy(hazardList[i].gameObject);
                 }
             }
         }

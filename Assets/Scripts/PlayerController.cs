@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     //Parts
     [SerializeField]
+    private GameObject body = null;
+    [SerializeField]
     private GameObject shoulder = null;
     [SerializeField]
     private GameObject fist = null;
@@ -72,6 +74,11 @@ public class PlayerController : MonoBehaviour
     {
         get { return frozen; }
         set { frozen = value; }
+    }
+
+    public void SetVisibility(bool visible)
+    {
+        body.SetActive(visible);
     }
 
     [SerializeField]
@@ -368,7 +375,7 @@ public class PlayerController : MonoBehaviour
 
         //Player Hit
         if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Fist") &&
-            thisCollider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            thisCollider.gameObject.layer == LayerMask.NameToLayer("Body"))
         {
             Debug.Log(this.name + " hit by " + hitCollider.name);
             float angle = Vector2.SignedAngle(fist.transform.position - transform.position, collision.GetContact(0).normal);
@@ -392,12 +399,12 @@ public class PlayerController : MonoBehaviour
         }
         //OutOfBounds
         else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("OutOfBounds") &&
-            thisCollider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            thisCollider.gameObject.layer == LayerMask.NameToLayer("Body"))
         {
             PlayHurtSound();
 
-            Reset();
-            gameObject.SetActive(false);
+            frozen = true;
+            SetVisibility(false);
             GameManager.Instance.PlayerDied(playerKey);
         }
         else

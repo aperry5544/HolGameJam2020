@@ -714,11 +714,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ff53f6f0dfd811d40a65796d0421346e, type: 3}
   - {fileID: 8300000, guid: a951e6cac8e2a584597972d0609ea97a, type: 3}
   hurtAudioClips:
-  - {fileID: 8300000, guid: ad4f343f92bde6f40854b18958deb547, type: 3}
-  - {fileID: 8300000, guid: f07ed3e0d6576d8459450abf8e62cb34, type: 3}
-  - {fileID: 8300000, guid: c8250eb77ad305f45a313a4d1667ab7a, type: 3}
-  - {fileID: 8300000, guid: ff53f6f0dfd811d40a65796d0421346e, type: 3}
-  - {fileID: 8300000, guid: a951e6cac8e2a584597972d0609ea97a, type: 3}
+  - {fileID: 8300000, guid: 33624ef4c5f5b2c4aacfadab5396a484, type: 3}
+  - {fileID: 8300000, guid: bd746acc58e3d6d4ea3c511d490a3950, type: 3}
+  - {fileID: 8300000, guid: 7796f375ad842c245b86d13239f19038, type: 3}
+  - {fileID: 8300000, guid: d56fb909190b8d243a384409b8c74a9d, type: 3}
+  - {fileID: 8300000, guid: dbd439d8c6d4e7b4288747f8294a8c46, type: 3}
+  - {fileID: 8300000, guid: 99a0527fac1f6ff44a247fa72a0c2851, type: 3}
+  - {fileID: 8300000, guid: 70563665ba2a7514c8168c15962bb51b, type: 3}
+  - {fileID: 8300000, guid: ef4a0888e4906fc40855cf6708dbb943, type: 3}
+  - {fileID: 8300000, guid: 35ea348ef201a8c4cbafb5f3b8fd5cd1, type: 3}
+  - {fileID: 8300000, guid: b0f809f7a405b2b4da238829cfe11699, type: 3}
+  - {fileID: 8300000, guid: 773d82cf4e76b3843a22c9f8bd0c53de, type: 3}
+  - {fileID: 8300000, guid: 88bb55f1d77d8dd429ce4b75fee4dd32, type: 3}
+  - {fileID: 8300000, guid: c485b4ce56467d34ab3cba55dd3883c9, type: 3}
+  - {fileID: 8300000, guid: c2ddbeaaaffacb54c8efeb14855f0096, type: 3}
 --- !u!50 &568241654
 Rigidbody2D:
   serializedVersion: 4

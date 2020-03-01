@@ -1477,6 +1477,7 @@ MonoBehaviour:
   suddenDeathTime: 30
   startPace: 5
   finalPace: 1
+  travelTime: 5
   angle:
     serializedVersion: 2
     m_Curve:

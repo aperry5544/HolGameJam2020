@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     private Text titleText = null;
 
     [SerializeField]
-    private Image titleImage = null;
+    private SpriteRenderer titleImage = null;
 
     [SerializeField]
     private Text gameStartText = null;

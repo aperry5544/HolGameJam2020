@@ -217,10 +217,12 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Gameplay:
                 FinishLoadLevel();
+                HazardManager.Instance.StartRound();
                 break;
             case GameState.Win:
                 PlayerWon();
                 UpdateState(GameState.LoadLevelPhase1);
+                HazardManager.Instance.EndRound();
                 break;
             default:
                 break;
@@ -423,7 +425,6 @@ public class GameManager : MonoBehaviour
             levels[previousLevel].gameObject.SetActive(false);
         }
 
-
         // UnFreeze Players
         foreach (KeyValuePair<KeyCode, PlayerController> player in playerList)
         {
@@ -523,6 +524,7 @@ public class GameManager : MonoBehaviour
     private void GameplayUpdate()
     {
         CheckForPlayerInput();
+        HazardManager.Instance.Active();
     }
 
     public void PlayerDied(KeyCode key)

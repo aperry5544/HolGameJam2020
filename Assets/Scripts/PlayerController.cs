@@ -57,6 +57,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI keyCodeText = null;
 
+    [SerializeField]
+    private AudioClip[] punchAudioClips = null;
+
+    [SerializeField]
+    private AudioClip[] hurtAudioClips = null;
+
+    private AudioSource audioSource = null;
+    private int latestHurtIndex = -1;
+    private int latestPunchIndex = -1;
+
     private string KeyCodeToString(KeyCode keycode)
     {
         // Normal letters
@@ -175,6 +185,39 @@ public class PlayerController : MonoBehaviour
         return keycode.ToString();
     }
 
+    private int RandomIntExcept(int min, int max, int except)
+    {
+        int uncheckedRandom = Random.Range(min, max - 1);
+        if (uncheckedRandom >= except)
+        {
+            uncheckedRandom += 1;
+        }
+
+        return uncheckedRandom;
+    }
+
+    private void PlayPunchSound()
+    {
+        if (!audioSource.isPlaying)
+        {
+            latestPunchIndex = RandomIntExcept(0, punchAudioClips.Length, latestPunchIndex);
+            audioSource.clip = punchAudioClips[latestPunchIndex];
+            audioSource.Play();
+        }
+    }
+
+    private void PlayHurtSound()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        latestHurtIndex = RandomIntExcept(0, hurtAudioClips.Length, latestHurtIndex);
+        audioSource.clip = hurtAudioClips[latestHurtIndex];
+        audioSource.Play();
+    }
+
     public void SetKeyCode(KeyCode keyCode)
     {
         playerKey = keyCode;
@@ -210,6 +253,11 @@ public class PlayerController : MonoBehaviour
     public void HideWins()
     {
         winText.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -275,12 +323,13 @@ public class PlayerController : MonoBehaviour
             hitDirection = collision.GetContact(0).normal;
             hitSpeed = initialHitSpeed + damage * hitSpeedMultiplyer;
 
+            PlayHurtSound();
         }
         //Hit Other
         else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Player") &&
             thisCollider.gameObject.layer == LayerMask.NameToLayer("Fist"))
         {
-
+            PlayPunchSound();
         }
         //OutOfBounds
         else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("OutOfBounds") &&
@@ -289,6 +338,8 @@ public class PlayerController : MonoBehaviour
             Reset();
             gameObject.SetActive(false);
             GameManager.Instance.PlayerDied(playerKey);
+
+            PlayHurtSound();
         }
         else
         {
@@ -298,6 +349,8 @@ public class PlayerController : MonoBehaviour
 
             ReflectAngle(new Vector2(-contact.normal.y, contact.normal.x));
             hitDirection = Vector2.Reflect(hitDirection, contact.normal);
+
+            PlayPunchSound();
         }
     }
 }

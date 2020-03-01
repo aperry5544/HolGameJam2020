@@ -17,10 +17,10 @@ public class HazardManager : MonoBehaviour
     private float travelTime = 5.0f;
 
     [SerializeField]
-    private AnimationCurve angle = null;
+    private GameObject hazardPrefab = null;
 
     [SerializeField]
-    private GameObject hazardPrefab = null;
+    private GameObject shadowPrefab = null;
 
     private bool isMaxSpeed = false;
     private bool shouldSpawn = false;
@@ -30,7 +30,8 @@ public class HazardManager : MonoBehaviour
 
     private float roundStartTime = 0.0f;
 
-    private List<HazardController> hazardList;    
+    private List<HazardController> hazardList;
+    private List<GameObject> shadowList;
     private static HazardManager instance = null;
 
     public static HazardManager Instance
@@ -48,41 +49,49 @@ public class HazardManager : MonoBehaviour
 
     public void Start()
     {
-        DontDestroyOnLoad(gameObject);
         curPace = startPace;
         hazardList = new List<HazardController>();
+        shadowList = new List<GameObject>();
         lastTime = Time.time;
     }
 
     // Update
     public void Active()
     {
-        if (Time.time - roundStartTime < suddenDeathTime)
+        if (Time.time - roundStartTime < suddenDeathTime) // Check if sudden death has started.
         {
             return;
         }
-        if (Time.time - lastTime >= curPace)
+        if (Time.time - lastTime >= curPace) // Check if we should spawn a hazard
         {
             lastTime = Time.time;
             shouldSpawn = true;
         }
-        if (shouldSpawn)
+        if (shouldSpawn) // If we should spawn a hazard
         {
-            GameObject newObj = Instantiate(hazardPrefab, Vector3.zero, Quaternion.identity);
-            HazardController newHazard = newObj.GetComponent<HazardController>();
+            GameObject newHaz = Instantiate(hazardPrefab, Vector3.zero, Quaternion.identity);
+            HazardController newHazard = newHaz.GetComponent<HazardController>();
+            GameObject newShad = Instantiate(shadowPrefab, Vector3.zero, Quaternion.identity);
+
             hazardList.Add(newHazard);
+            shadowList.Add(newShad);
 
             Vector2 spawnPoint = new Vector2(Random.Range(-10f, 10f), Random.Range(-5f, 5f));
-            newHazard.Initialize(spawnPoint, travelTime, angle);
+            newHazard.Initialize(spawnPoint, travelTime);
+            newShad.transform.position = spawnPoint;
+
             shouldSpawn = false;
         }
         for (int i = 0; i < hazardList.Count; i++)
         {
-            hazardList[i].DoUpdate();
+            if (hazardList[i] != null)
+            {
+                hazardList[i].DoUpdate();
+            }
         }
         if (!isMaxSpeed)
         {
-            curPace = Mathf.Lerp(startPace, finalPace, Time.deltaTime);
+            curPace -= 0.001f;
 
             if (curPace <= finalPace)
             {
@@ -96,6 +105,7 @@ public class HazardManager : MonoBehaviour
     {
         roundStartTime = Time.time;
         curPace = startPace;
+        isMaxSpeed = false;
     }
 
     public void EndRound()
@@ -110,7 +120,18 @@ public class HazardManager : MonoBehaviour
                 }
             }
         }
+        if (shadowList.Count > 0)
+        {
+            for (int i = 0; i < shadowList.Count; i++)
+            {
+                if (shadowList[i] != null)
+                {
+                    Destroy(shadowList[i].gameObject);
+                }
+            }
+        }
 
         hazardList.Clear();
+        shadowList.Clear();
     }
 }

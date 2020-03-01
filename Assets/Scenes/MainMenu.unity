@@ -1662,7 +1662,7 @@ MonoBehaviour:
   levels:
   - {fileID: 2476697017794267735}
   - {fileID: 2476697018334440396}
-  - {fileID: 0}
+  - {fileID: 1928762541}
   levelMoveDistance: 20
   levelMoveSpeed: 15
   playerRaiseScale: 2
@@ -1700,6 +1700,12 @@ Transform:
   m_Father: {fileID: 519420032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1928762541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7239351852987991357, guid: 545a824fba3e5c948bfabcb2aa5f7aa5,
+    type: 3}
+  m_PrefabInstance: {fileID: 225358024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1936768094
 GameObject:
   m_ObjectHideFlags: 0

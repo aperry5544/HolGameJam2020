@@ -1926,6 +1926,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Konnichiwa
       objectReference: {fileID: 0}
+    - target: {fileID: 6072600414014232532, guid: d6f3b96aee44521449d6a78a844696d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6072600414014232535, guid: d6f3b96aee44521449d6a78a844696d2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1980,17 +1985,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6072600414401827296, guid: d6f3b96aee44521449d6a78a844696d2,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d66cecfef81dcab4db5b34226e2b12c1,
-        type: 3}
-    - target: {fileID: 6072600414401827296, guid: d6f3b96aee44521449d6a78a844696d2,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6f3b96aee44521449d6a78a844696d2, type: 3}

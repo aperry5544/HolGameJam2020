@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Text;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private KeyCode playerKey = KeyCode.A;
 
     //Parts
+    [SerializeField]
+    private GameObject body = null;
     [SerializeField]
     private GameObject shoulder = null;
     [SerializeField]
@@ -49,6 +49,11 @@ public class PlayerController : MonoBehaviour
     {
         get { return frozen; }
         set { frozen = value; }
+    }
+
+    public void SetVisibility(bool visible)
+    {
+        body.SetActive(visible);
     }
 
     [SerializeField]
@@ -314,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
         //Player Hit
         if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Fist") &&
-            thisCollider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            thisCollider.gameObject.layer == LayerMask.NameToLayer("Body"))
         {
             Debug.Log(this.name + " hit by " + hitCollider.name);
             float angle = Vector2.SignedAngle(fist.transform.position - transform.position, collision.GetContact(0).normal);
@@ -322,24 +327,29 @@ public class PlayerController : MonoBehaviour
             damage += 20;
             hitDirection = collision.GetContact(0).normal;
             hitSpeed = initialHitSpeed + damage * hitSpeedMultiplyer;
-
+            HitDecalManager.Instance.BodyHit(collision.GetContact(0).point);
             PlayHurtSound();
         }
         //Hit Other
-        else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Player") &&
+        else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Fist") &&
             thisCollider.gameObject.layer == LayerMask.NameToLayer("Fist"))
         {
+            ContactPoint2D contact = collision.GetContact(0);
+
+            ReflectAngle(new Vector2(-contact.normal.y, contact.normal.x));
+            hitDirection = Vector2.Reflect(hitDirection, contact.normal);
+            HitDecalManager.Instance.FistHit(collision.GetContact(0).point);
             PlayPunchSound();
         }
         //OutOfBounds
         else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("OutOfBounds") &&
-            thisCollider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            thisCollider.gameObject.layer == LayerMask.NameToLayer("Body"))
         {
-            Reset();
-            gameObject.SetActive(false);
-            GameManager.Instance.PlayerDied(playerKey);
-
             PlayHurtSound();
+
+            frozen = true;
+            SetVisibility(false);
+            GameManager.Instance.PlayerDied(playerKey);
         }
         else
         {

@@ -22,6 +22,9 @@ public class HazardManager : MonoBehaviour
     [SerializeField]
     private GameObject hazardPrefab = null;
 
+    [SerializeField]
+    private Sprite shadowSprite = null;
+
     private bool isMaxSpeed = false;
     private bool shouldSpawn = false;
 
@@ -57,16 +60,16 @@ public class HazardManager : MonoBehaviour
     // Update
     public void Active()
     {
-        if (Time.time - roundStartTime < suddenDeathTime)
+        if (Time.time - roundStartTime < suddenDeathTime) // Check if sudden death has started.
         {
             return;
         }
-        if (Time.time - lastTime >= curPace)
+        if (Time.time - lastTime >= curPace) // Check if we should spawn a hazard
         {
             lastTime = Time.time;
             shouldSpawn = true;
         }
-        if (shouldSpawn)
+        if (shouldSpawn) // If we should spawn a hazard
         {
             GameObject newObj = Instantiate(hazardPrefab, Vector3.zero, Quaternion.identity);
             HazardController newHazard = newObj.GetComponent<HazardController>();

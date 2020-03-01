@@ -4,41 +4,33 @@ using UnityEngine;
 
 public class HazardController : MonoBehaviour
 {
-    [SerializeField]
-    private float minTravel = 1f;
-
-    [SerializeField]
-    private float maxTravel = 10f;
-
-    [SerializeField]
-    private float dropHeight = 5f;
-
     private float curTime = 0.0f;
-    private float startTime = 0.0f;
     private float travelTime = 5.0f;
 
-    private Vector2 spawnPoint;
+    private Vector2 spawnPoint, landingPoint;
     private AnimationCurve curve;
 
     public void Initialize(Vector2 _pos, float _travelTime, AnimationCurve _animCurve)
     {
-        spawnPoint = _pos;
+        landingPoint = _pos;
         curve = _animCurve;
         travelTime = _travelTime;
-        transform.position = new Vector3(spawnPoint.x + Random.Range(minTravel, maxTravel), spawnPoint.y + dropHeight, 0f);
-        startTime = curTime = Time.time;
-        Debug.Log("SpawnPoint: " + spawnPoint.ToString() + "\nRealPoint: " + transform.position.ToString());
+        spawnPoint = transform.position = new Vector3(_pos.x + Random.Range(-8f, 8f), _pos.y + 5f, 0f);
     }
 
     public void DoUpdate()
     {
         curTime += Time.deltaTime;
-        float xPos, yPos;
-        xPos = Mathf.Lerp(transform.position.x, spawnPoint.x, (curTime - startTime) / travelTime);
-        yPos = curve.Evaluate((curTime - startTime) / travelTime);
+        float xPos = Map(curTime, 0f, travelTime, spawnPoint.x, landingPoint.x);
+        float yPos = curve.Evaluate(Map(curTime, 0f, travelTime, 0f, 1f));
         //Debug.Log("animCurve evaluation:\ncurTime-startTime: " + (curTime - startTime).ToString()
         //    + "\ntravelTime: " + travelTime.ToString() + "\nEvaluation:" + yPos.ToString());
 
         transform.position = new Vector3(xPos, yPos, 0f);
+    }
+
+    private float Map(float _value, float _fromfrom, float _fromto, float _tofrom, float _toto)
+    {
+        return ((_value - _fromfrom) / (_fromto - _fromfrom)) * (_toto - _tofrom) + _tofrom;
     }
 }

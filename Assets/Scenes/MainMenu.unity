@@ -1264,7 +1264,10 @@ MonoBehaviour:
     2. Double tap that key to leave
 
     3.
-    All players hold down your keys to start!'
+    All players hold down your keys to start!
+
+    4. Press ''Escape'' at any time
+    to exit'
 --- !u!222 &921416733
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1855,7 +1858,7 @@ MonoBehaviour:
   - {fileID: 244572565}
   levelMoveDistance: 20
   levelMoveSpeed: 15
-  playerRaiseScale: 5
+  playerRaiseScale: 2
   playerRaiseScaleSpeed: 5
   playerPrefab: {fileID: 368991222793358616, guid: 19247224b172ce54db81dc0cef85196a,
     type: 3}

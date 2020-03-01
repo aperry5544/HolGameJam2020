@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     private float levelMoveSpeed = 10;
 
     [SerializeField]
+    [Range(1.1f, 10)]
     private float playerRaiseScale = 1.5f;
 
     [SerializeField]
@@ -263,7 +264,38 @@ public class GameManager : MonoBehaviour
         {
             if (e.keyCode == KeyCode.Escape)
             {
+                UnityEditor.EditorApplication.isPlaying = false;
                 Application.Quit();
+                return;
+            }
+
+            if (e.keyCode == KeyCode.ScrollLock ||
+                e.keyCode == KeyCode.Pause ||
+                e.keyCode == KeyCode.Insert ||
+                e.keyCode == KeyCode.Delete ||
+                e.keyCode == KeyCode.PageDown ||
+                e.keyCode == KeyCode.PageUp ||
+                e.keyCode == KeyCode.Home ||
+                e.keyCode == KeyCode.End ||
+                e.keyCode == KeyCode.Tab ||
+                e.keyCode == KeyCode.CapsLock ||
+                e.keyCode == KeyCode.LeftShift ||
+                e.keyCode == KeyCode.RightShift ||
+                e.keyCode == KeyCode.LeftControl ||
+                e.keyCode == KeyCode.RightControl ||
+                e.keyCode == KeyCode.AltGr ||
+                e.keyCode == KeyCode.LeftAlt ||
+                e.keyCode == KeyCode.RightAlt ||
+                e.keyCode == KeyCode.KeypadEnter ||
+                e.keyCode == KeyCode.Backspace ||
+                e.keyCode == KeyCode.LeftArrow ||
+                e.keyCode == KeyCode.RightArrow ||
+                e.keyCode == KeyCode.UpArrow ||
+                e.keyCode == KeyCode.DownArrow ||
+                e.keyCode == KeyCode.Numlock ||
+                e.keyCode == KeyCode.KeypadEnter ||
+                e.keyCode == KeyCode.Return)
+            {
                 return;
             }
 

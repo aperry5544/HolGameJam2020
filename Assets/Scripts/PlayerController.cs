@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Runtime.InteropServices;
+using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -51,10 +53,132 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI winText = null;
-    
+
+    [SerializeField]
+    private TextMeshProUGUI keyCodeText = null;
+
+    private string KeyCodeToString(KeyCode keycode)
+    {
+        // Normal letters
+        if (keycode >= KeyCode.A && keycode <= KeyCode.Z)
+        {
+            return keycode.ToString();
+        }
+
+        // Alpha Numbers
+        if (keycode >= KeyCode.Alpha0 && keycode <= KeyCode.Alpha9)
+        {
+            string number = string.Empty;
+            number += (char)keycode;
+
+            return number;
+        }
+
+        // Keypad Numbers
+        if (keycode >= KeyCode.Keypad0 && keycode <= KeyCode.Keypad9)
+        {
+            string number = string.Empty;
+            int value = (int)keycode - (KeyCode.Keypad0 - KeyCode.Alpha0);
+            number += 'N';
+            number += (char)value;
+
+
+            return number;
+        }
+
+        if (keycode == KeyCode.Space)
+        {
+            return "_";
+        }
+
+        if (keycode == KeyCode.BackQuote)
+        {
+            return "`";
+        }
+
+        if (keycode == KeyCode.Minus)
+        {
+            return "-";
+        }
+
+        if (keycode == KeyCode.Equals)
+        {
+            return "=";
+        }
+
+        if (keycode == KeyCode.KeypadDivide)
+        {
+            return "N/";
+        }
+
+        if (keycode == KeyCode.KeypadMultiply)
+        {
+            return "N*";
+        }
+
+        if (keycode == KeyCode.KeypadMinus)
+        {
+            return "N-";
+        }
+
+        if (keycode == KeyCode.KeypadPlus)
+        {
+            return "N+";
+        }
+
+        if (keycode == KeyCode.KeypadPeriod)
+        {
+            return "N.";
+        }
+
+        if (keycode == KeyCode.Period)
+        {
+            return ".";
+        }
+
+        if (keycode == KeyCode.Comma)
+        {
+            return ",";
+        }
+
+        if (keycode == KeyCode.Slash)
+        {
+            return "/";
+        }
+
+        if (keycode == KeyCode.Semicolon)
+        {
+            return ";";
+        }
+
+        if (keycode == KeyCode.Quote)
+        {
+            return "'";
+        }
+
+        if (keycode == KeyCode.LeftBracket)
+        {
+            return "[";
+        }
+
+        if (keycode == KeyCode.RightBracket)
+        {
+            return "]";
+        }
+
+        if (keycode == KeyCode.Backslash)
+        {
+            return "\\";
+        }
+
+        Debug.Log(string.Format("Forgot to implement an override for {0}", keycode.ToString()));
+        return keycode.ToString();
+    }
+
     public void SetKeyCode(KeyCode keyCode)
     {
         playerKey = keyCode;
+        keyCodeText.text = KeyCodeToString(keyCode);
     }
 
     public void ActivateFist()

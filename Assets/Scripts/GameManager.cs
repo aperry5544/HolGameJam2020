@@ -126,7 +126,22 @@ public class GameManager : MonoBehaviour
         PlayerController pc = newPlayer.GetComponent<PlayerController>();
         playerList.Add(key, pc);
         score[key] = 0;
-        pc.SetKeyCode(key, playerArt[UnityEngine.Random.Range(0, playerArt.Length)]);
+        if(playerList.Count == 1)
+        {
+            pc.SetKeyCode(key, playerArt[0]);
+        }
+        else if (playerList.Count == 2)
+        {
+            pc.SetKeyCode(key, playerArt[1]);
+        }
+        else if (playerList.Count == 3)
+        {
+            pc.SetKeyCode(key, playerArt[2]);
+        }
+        else
+        {
+            pc.SetKeyCode(key, playerArt[UnityEngine.Random.Range(0, playerArt.Length)]);
+        }
 
         // Get the spawn pose of the title screen
         List<Vector2> spawnPoses = titleImage.gameObject.GetComponent<Level>().GetSpawnPositions(playerList.Count);

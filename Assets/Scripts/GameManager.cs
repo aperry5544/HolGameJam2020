@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float playerRaiseScaleSpeed = 10.0f;
 
+    [SerializeField]
+    private PlayerController.PlayerSprite[] playerArt = null;
+
     private int currentLevel = -1;
     private int previousLevel = -1;
     private float currentGameStartTime = 0.0f;
@@ -117,7 +120,7 @@ public class GameManager : MonoBehaviour
         PlayerController pc = newPlayer.GetComponent<PlayerController>();
         playerList.Add(key, pc);
         score[key] = 0;
-        pc.SetKeyCode(key);
+        pc.SetKeyCode(key, playerArt[UnityEngine.Random.Range(0, playerArt.Length)]);
 
         // Get the spawn pose of the title screen
         List<Vector2> spawnPoses = titleImage.gameObject.GetComponent<Level>().GetSpawnPositions(playerList.Count);

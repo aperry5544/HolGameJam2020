@@ -1,13 +1,36 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Text;
 using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Serializable]
+    public struct PlayerSprite
+    {
+        public Sprite headNormal;
+        public Sprite headHurt;
+        public Sprite headLeft;
+        public Sprite headRight;
+        public Sprite arm;
+        public Sprite body;
+        public Sprite fist;
+    }
+
     //Controls
     [SerializeField]
     private KeyCode playerKey = KeyCode.A;
+
+    //Renderers
+    [SerializeField]
+    private SpriteRenderer headRenderer = null;
+    [SerializeField]
+    private SpriteRenderer bodyRenderer = null;
+    [SerializeField]
+    private SpriteRenderer fistRenderer = null;
+    [SerializeField]
+    private SpriteRenderer armRenderer = null;
 
     //Parts
     [SerializeField]
@@ -66,6 +89,8 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource = null;
     private int latestHurtIndex = -1;
     private int latestPunchIndex = -1;
+    private PlayerSprite playerSprite;
+    private float timeLeftOnHurtOverride = 0.0f;
 
     private string KeyCodeToString(KeyCode keycode)
     {
@@ -187,7 +212,7 @@ public class PlayerController : MonoBehaviour
 
     private int RandomIntExcept(int min, int max, int except)
     {
-        int uncheckedRandom = Random.Range(min, max - 1);
+        int uncheckedRandom = UnityEngine.Random.Range(min, max - 1);
         if (uncheckedRandom >= except)
         {
             uncheckedRandom += 1;
@@ -218,8 +243,13 @@ public class PlayerController : MonoBehaviour
         audioSource.Play();
     }
 
-    public void SetKeyCode(KeyCode keyCode)
+    public void SetKeyCode(KeyCode keyCode, PlayerSprite sprite)
     {
+        playerSprite = sprite;
+        headRenderer.sprite = sprite.headNormal;
+        armRenderer.sprite = sprite.arm;
+        bodyRenderer.sprite = sprite.body;
+        fistRenderer.sprite = sprite.fist;
         playerKey = keyCode;
         keyCodeText.text = KeyCodeToString(keyCode);
     }
@@ -270,7 +300,14 @@ public class PlayerController : MonoBehaviour
 
         if(active)
         {
-            FireFist();
+            if (FireFist() == FistDirection.Left)
+            {
+                headRenderer.sprite = playerSprite.headLeft;
+            }
+            else
+            {
+                headRenderer.sprite = playerSprite.headRight;
+            }
         }
         else
         {
@@ -286,12 +323,29 @@ public class PlayerController : MonoBehaviour
                 hitSpeed = 0;
             }
         }
+
+        if (timeLeftOnHurtOverride > 0)
+        {
+            headRenderer.sprite = playerSprite.headHurt;
+            timeLeftOnHurtOverride -= Time.deltaTime;
+        }
     }
 
-    private void FireFist()
+    private enum FistDirection
+    {
+        Left,
+        Right,
+    }
+
+    private FistDirection FireFist()
     {
         fistDirection = fist.transform.position - transform.position;
         gameObject.transform.Translate(fistDirection.normalized * fistVelocity * Time.deltaTime);
+
+        if (fistDirection.x <= 0)
+            return FistDirection.Left;
+        else
+            return FistDirection.Right;
     }
 
     private void RotateFist()

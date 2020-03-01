@@ -121,6 +121,8 @@ public class GameManager : MonoBehaviour
         currentMapSpawnPoses = new Dictionary<KeyCode, Vector2>();
         currentPlayerDeathPoses = new Dictionary<KeyCode, Vector2>();
         UpdateState(GameState.Welcome);
+
+        Cursor.visible = false;
     }
 
     public void AddPlayer(KeyCode key)
@@ -309,7 +311,9 @@ public class GameManager : MonoBehaviour
         {
             if (e.keyCode == KeyCode.Escape)
             {
+#if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
+#endif
                 Application.Quit();
                 return;
             }
@@ -408,7 +412,6 @@ public class GameManager : MonoBehaviour
             if (levels.Length < 3)
             {
                 Debug.LogError("NEED AT LEAST 3 LEVELS. SELF DESTRUCTING NOW.");
-                UnityEditor.EditorApplication.isPlaying = false;
             }
             while (levelIndex == previousLevel || levelIndex == currentLevel || levelIndex == -1)
             {

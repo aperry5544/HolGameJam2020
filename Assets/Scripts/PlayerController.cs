@@ -72,7 +72,12 @@ public class PlayerController : MonoBehaviour
     private float hitSpeedMultiplyer = 0.1f;
     [SerializeField]
     private float hitSpeedDecreaseRate = 0;
+    [SerializeField]
+    private float redPulseSpeed = 1;
+
     private Vector2 hitDirection;
+    private float currentRedLevel = 0;
+    private float targetRedLevel = 0;
 
     //Freeze Property
     private bool frozen = false;
@@ -287,6 +292,9 @@ public class PlayerController : MonoBehaviour
     {
         damage = 0;
         hitSpeed = 0;
+        targetRedLevel = 0;
+        SetPlayerRedTint(0);
+        currentRedLevel = 0;
     }
 
     public void ShowWins(int numberOfWins)
@@ -311,6 +319,27 @@ public class PlayerController : MonoBehaviour
         if(frozen)
         {
             return;
+        }
+
+        currentRedLevel += redPulseSpeed * Time.deltaTime;
+
+        // Ramp Up Red Flash
+        if (currentRedLevel < 255)
+        {
+            float percent = currentRedLevel / 255.0f;
+            SetPlayerRedTint(percent * targetRedLevel);
+        }
+        // Ramd Down Red Flash
+        else if (currentRedLevel < 510)
+        {
+            float percent = (currentRedLevel - 255.0f) / 255.0f;
+            SetPlayerRedTint(targetRedLevel - (percent * targetRedLevel));
+        }
+        // Reset Red Flash
+        else
+        {
+            SetPlayerRedTint(0);
+            currentRedLevel = 0;
         }
 
         if(active)
@@ -381,6 +410,15 @@ public class PlayerController : MonoBehaviour
         Debug.DrawLine(transform.position, fist.transform.position - transform.position, Color.cyan, 5);
     }
 
+    private void SetPlayerRedTint(float r)
+    {
+        Color newColor = new Color(1, (255 - r) / 255.0f, (255 - r) / 255.0f);
+        headRenderer.color = newColor;
+        armRenderer.color = newColor;
+        bodyRenderer.color = newColor;
+        fistRenderer.color = newColor;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Collider2D thisCollider = collision.otherCollider;
@@ -399,6 +437,7 @@ public class PlayerController : MonoBehaviour
             HitDecalManager.Instance.BodyHit(collision.GetContact(0).point);
             PlayHurtSound();
             timeLeftOnHurtOverride = hurtFaceTimer;
+            targetRedLevel = damage * 0.01f * 255;
         }
         //Hit Other
         else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Fist") &&

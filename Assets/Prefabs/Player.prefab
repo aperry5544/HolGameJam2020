@@ -5491,6 +5491,7 @@ MonoBehaviour:
   initialHitSpeed: 5
   hitSpeedMultiplyer: 0.1
   hitSpeedDecreaseRate: 10
+  redPulseSpeed: 500
   winText: {fileID: 1879228442}
   keyCodeText: {fileID: 204860878}
   punchAudioClips:

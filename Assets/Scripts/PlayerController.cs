@@ -322,13 +322,18 @@ public class PlayerController : MonoBehaviour
             damage += 20;
             hitDirection = collision.GetContact(0).normal;
             hitSpeed = initialHitSpeed + damage * hitSpeedMultiplyer;
-
+            HitDecalManager.Instance.BodyHit(collision.GetContact(0).point);
             PlayHurtSound();
         }
         //Hit Other
-        else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Player") &&
+        else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Fist") &&
             thisCollider.gameObject.layer == LayerMask.NameToLayer("Fist"))
         {
+            ContactPoint2D contact = collision.GetContact(0);
+
+            ReflectAngle(new Vector2(-contact.normal.y, contact.normal.x));
+            hitDirection = Vector2.Reflect(hitDirection, contact.normal);
+            HitDecalManager.Instance.FistHit(collision.GetContact(0).point);
             PlayPunchSound();
         }
         //OutOfBounds

@@ -14,6 +14,9 @@ public class HazardManager : MonoBehaviour
     private float finalPace = 1.0f;
 
     [SerializeField]
+    private float travelTime = 5.0f;
+
+    [SerializeField]
     private AnimationCurve angle;
 
     [SerializeField]
@@ -70,7 +73,7 @@ public class HazardManager : MonoBehaviour
             hazardList.Add(newHazard);
 
             Vector2 spawnPoint = new Vector2(Random.Range(-10f, 10f), Random.Range(-5f, 5f));
-            newHazard.Initialize(spawnPoint, angle);
+            newHazard.Initialize(spawnPoint, travelTime, angle);
             shouldSpawn = false;
         }
         for (int i = 0; i < hazardList.Count; i++)

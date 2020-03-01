@@ -258,6 +258,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetKeyCode(KeyCode keyCode, PlayerSprite sprite)
     {
+        PlayHurtSound();
         playerSprite = sprite;
         headRenderer.sprite = sprite.headNormal;
         headRenderer.transform.localPosition = sprite.headNormalOffsett;

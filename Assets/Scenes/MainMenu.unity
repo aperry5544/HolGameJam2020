@@ -1473,7 +1473,7 @@ MonoBehaviour:
   - {fileID: 7239351853165901301}
   - {fileID: 7239351852740129225}
   - {fileID: 7239351852910497979}
-  levelMoveDistance: 20
+  levelMoveDistance: 19.2
   levelMoveSpeed: 15
   playerRaiseScale: 2
   winnerRaiseScale: 5
@@ -1865,7 +1865,7 @@ PrefabInstance:
     - target: {fileID: 3239077068312353723, guid: 44fc7ad276375864186f4d58f97e67c3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 19.2
       objectReference: {fileID: 0}
     - target: {fileID: 3239077068312353723, guid: 44fc7ad276375864186f4d58f97e67c3,
         type: 3}
@@ -1952,7 +1952,7 @@ PrefabInstance:
     - target: {fileID: 6072600414014232535, guid: d6f3b96aee44521449d6a78a844696d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 19.2
       objectReference: {fileID: 0}
     - target: {fileID: 6072600414014232535, guid: d6f3b96aee44521449d6a78a844696d2,
         type: 3}
@@ -2038,7 +2038,7 @@ PrefabInstance:
     - target: {fileID: 1358132863095900165, guid: 3a158f34b4708f742b0f398459471fb7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 19.2
       objectReference: {fileID: 0}
     - target: {fileID: 1358132863095900165, guid: 3a158f34b4708f742b0f398459471fb7,
         type: 3}
@@ -2095,6 +2095,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BurgerTown
       objectReference: {fileID: 0}
+    - target: {fileID: 1358132863095900166, guid: 3a158f34b4708f742b0f398459471fb7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a158f34b4708f742b0f398459471fb7, type: 3}
 --- !u!1001 &5832024623047564655
@@ -2107,7 +2112,7 @@ PrefabInstance:
     - target: {fileID: 3790020263174744217, guid: 63fd44903fa186942839be0193c59888,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 19.2
       objectReference: {fileID: 0}
     - target: {fileID: 3790020263174744217, guid: 63fd44903fa186942839be0193c59888,
         type: 3}
@@ -2221,7 +2226,7 @@ PrefabInstance:
     - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 19.2
       objectReference: {fileID: 0}
     - target: {fileID: 1979794371067738566, guid: 67e28450667b86c4d8b93ae8c3a424ff,
         type: 3}

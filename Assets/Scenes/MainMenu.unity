@@ -1514,6 +1514,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1807390200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1807390202}
+  - component: {fileID: 1807390201}
+  m_Layer: 0
+  m_Name: HazardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1807390201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807390200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c018328e9065f5049825f6c56e302c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suddenDeathTime: 30
+  startPace: 5
+  finalPace: 1
+  angle:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hazardPrefab: {fileID: 6953399099687287523, guid: bdd0eddc361ffa943a1837e5a39fa39c,
+    type: 3}
+--- !u!4 &1807390202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807390200}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.22889104, y: -0.15045744, z: -1.7847115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1910767104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,7 +1713,7 @@ MonoBehaviour:
   welcomeDuration: 2
   fadeDuration: 2
   doubleClickTimeout: 0.1
-  gameStartTime: 5
+  gameStartTime: 3
   levels:
   - {fileID: 2476697017794267735}
   - {fileID: 2476697018334440396}
@@ -1668,6 +1722,40 @@ MonoBehaviour:
   levelMoveSpeed: 15
   playerRaiseScale: 2
   playerRaiseScaleSpeed: 5
+  playerArt:
+  - headNormal: {fileID: 21300000, guid: 8c07be2b049fbd34ea25116b7bec4691, type: 3}
+    headNormalOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headHurt: {fileID: 21300000, guid: 25aa861dde4629044ba4f7fbd3b203a8, type: 3}
+    headHurtOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headLeft: {fileID: 21300000, guid: 71f815ed30f9a7842b18507cf56cf948, type: 3}
+    headLeftOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headRight: {fileID: 21300000, guid: 9d3403d71751900459e6bf614aa8062f, type: 3}
+    headRightOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    arm: {fileID: 21300000, guid: cef93b1d7c16bf148907b847381d11fa, type: 3}
+    body: {fileID: 21300000, guid: 7c2b6a17cca170c4c87437b58a4aba44, type: 3}
+    fist: {fileID: 21300000, guid: 6c4b80730b0427842b27e8c202b927de, type: 3}
+  - headNormal: {fileID: 21300000, guid: 49cb9db5ed100054aa1ffe05cdad035e, type: 3}
+    headNormalOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headHurt: {fileID: 21300000, guid: f3f72c28239dc714585637912f7a5d09, type: 3}
+    headHurtOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headLeft: {fileID: 21300000, guid: 741fef3e3b185c240bd981f3902ed722, type: 3}
+    headLeftOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headRight: {fileID: 21300000, guid: 3ebefc9006320d745a9625f9e4749295, type: 3}
+    headRightOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    arm: {fileID: 21300000, guid: 5020998fb3e980c4e81f53fddd1c3b49, type: 3}
+    body: {fileID: 21300000, guid: 733d3234e025d234d942a10e20f4a14b, type: 3}
+    fist: {fileID: 21300000, guid: 231f04e22f2679c42a3e0df5b2f62174, type: 3}
+  - headNormal: {fileID: 21300000, guid: 34b41e5caba95564a809af037618b0b6, type: 3}
+    headNormalOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headHurt: {fileID: 21300000, guid: 53c2733e779e476449e8e8eeea65fd5d, type: 3}
+    headHurtOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headLeft: {fileID: 21300000, guid: 35af2831a9a97464bbb749dda8edfb22, type: 3}
+    headLeftOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    headRight: {fileID: 21300000, guid: 68538c1f6ba611247bbca0f08d3b7225, type: 3}
+    headRightOffsett: {x: -0.003, y: 0.112, z: -0.03}
+    arm: {fileID: 21300000, guid: c955a41d7c95a1e49be769ba4b54b29c, type: 3}
+    body: {fileID: 21300000, guid: cc2cc287c4d978749b80d7c06a1eaa01, type: 3}
+    fist: {fileID: 21300000, guid: 231f04e22f2679c42a3e0df5b2f62174, type: 3}
   playerPrefab: {fileID: 368991222793358616, guid: 19247224b172ce54db81dc0cef85196a,
     type: 3}
 --- !u!82 &1912401239

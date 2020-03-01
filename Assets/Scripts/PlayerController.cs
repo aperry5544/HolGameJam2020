@@ -10,9 +10,13 @@ public class PlayerController : MonoBehaviour
     public struct PlayerSprite
     {
         public Sprite headNormal;
+        public Vector3 headNormalOffsett;
         public Sprite headHurt;
+        public Vector3 headHurtOffsett;
         public Sprite headLeft;
+        public Vector3 headLeftOffsett;
         public Sprite headRight;
+        public Vector3 headRightOffsett;
         public Sprite arm;
         public Sprite body;
         public Sprite fist;
@@ -54,6 +58,8 @@ public class PlayerController : MonoBehaviour
     private float fistActiveScale = 2;
     [SerializeField]
     private float fistInactiveScale = 1;
+    [SerializeField]
+    private float hurtFaceTimer = 2;
 
     //Health Properties
     [SerializeField]
@@ -254,6 +260,7 @@ public class PlayerController : MonoBehaviour
     {
         playerSprite = sprite;
         headRenderer.sprite = sprite.headNormal;
+        headRenderer.transform.localPosition = sprite.headNormalOffsett;
         armRenderer.sprite = sprite.arm;
         bodyRenderer.sprite = sprite.body;
         fistRenderer.sprite = sprite.fist;
@@ -310,15 +317,19 @@ public class PlayerController : MonoBehaviour
             if (FireFist() == FistDirection.Left)
             {
                 headRenderer.sprite = playerSprite.headLeft;
+                headRenderer.transform.localPosition = playerSprite.headLeftOffsett;
             }
             else
             {
                 headRenderer.sprite = playerSprite.headRight;
+                headRenderer.transform.localPosition = playerSprite.headRightOffsett;
             }
         }
         else
         {
             RotateFist();
+            headRenderer.sprite = playerSprite.headNormal;
+            headRenderer.transform.localPosition = playerSprite.headNormalOffsett;
         }
 
         if(hitSpeed != 0)
@@ -334,6 +345,7 @@ public class PlayerController : MonoBehaviour
         if (timeLeftOnHurtOverride > 0)
         {
             headRenderer.sprite = playerSprite.headHurt;
+            headRenderer.transform.localPosition = playerSprite.headHurtOffsett;
             timeLeftOnHurtOverride -= Time.deltaTime;
         }
     }
@@ -385,6 +397,7 @@ public class PlayerController : MonoBehaviour
             hitSpeed = initialHitSpeed + damage * hitSpeedMultiplyer;
             HitDecalManager.Instance.BodyHit(collision.GetContact(0).point);
             PlayHurtSound();
+            timeLeftOnHurtOverride = hurtFaceTimer;
         }
         //Hit Other
         else if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Fist") &&
